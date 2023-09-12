@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>社員一覧</title>
+		<meta charset="UTF-8" />
+	</head>
+	<body>
+		<h1>社員一覧</h1>
+		<form action="details" method="post">
+			<table>
+				<tr th:if="${!#lists.isEmpty(employee)}" th:each="employee : ${employeeList}">
+					<thead>
+						<td>No</td>
+						<td>氏名</td>
+						<td>出身地</td>
+						<td>入社月</td>
+						<td></td>
+					</thead>
+					<tbody>
+						<td th:text="${employee.id}"></td>
+						<td th:text="${employee.name}"></td>
+						<td th:text="${employee.hometown}"></td>
+						<td th:text="${employee.joining_month}"></td>
+						<td th:text="<button type='submit' name='${employee.id}'>詳細</button>"></td>
+					</tbody>
+				</tr>
+			</table>
+			<button type="submit" formaction="new">新規登録へ</button>
+		</form>
+	</body>
+</html>
