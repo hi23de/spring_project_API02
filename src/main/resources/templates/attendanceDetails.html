@@ -1,32 +1,42 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
 <head>
 	<title>社員詳細</title>
 	<meta charset="UTF-8" />
 </head>
+
 <body>
-	<h1 th:text=""></h1>
-	<form action="clocks" method="post">
-		<button type="submit" formaction="attendace">出勤</button>
-		<button type="submit" formaction="restStart">休憩開始</button>
-		<button type="submit" formaction="restEnd">休憩終了</button>
-		<button type="submit" formaction="leaving">退勤</button><br>
-		<table>
-			<tr th:if="${!#lists.isEmpty(clock)}" th:each="clock : ${attendClockList}">
-				<thead>
-					<td>出勤日時</td>
-					<td>休憩開始日時</td>
-					<td>休憩終了日時</td>
-					<td>退勤日時</td>
-				</thead>
-				<tbody>
-					<td th:text="${clock.clock_in}"></td>
-					<td th:text="${clock.break_start}"></td>
-					<td th:text="${clock.break_end}"></td>
-					<td th:text="${clock.clock_out}"></td>
-				</tbody>
+	<h1>社員詳細</h1>
+	<h2 th:text="${employeeDetail.name}"></h2>
+	<div>
+		<form action="/addAttendance" method="post">
+			<input type="hidden" name="id" th:value="${employeeDetail.id}">
+			<button type="submit" name="submit" value="in">出勤</button>
+			<button type="submit" name="submit" value="break_start">休憩開始</button>
+			<button type="submit" name="submit" value="break_end">休憩終了</button>
+			<button type="submit" name="submit" value="out">退勤</button>
+		</form>
+	</div>
+	<table>
+		<thead>
+			<tr>
+				<th>出勤日時</th>
+				<th>休憩開始日時</th>
+				<th>休憩終了日時</tth>
+				<th>退勤日時</td>
 			</tr>
-		</table>
-		<button type="submit" formaction="attendanceTable">社員一覧へ</button>
-	</form>
+		</thead>
+		<tbody>
+			<tr>
+				<td th:text="${employeeDetail.attendace?.clockIn}"></td>
+				<td th:text="${employeeDetail.attendace?.breakStart}"></td>
+				<td th:text="${employeeDetail.attendace?.breakEnd}"></td>
+				<td th:text="${employeeDetail.attendace?.clockOut}"></td>
+			</tr>
+		</tbody>
+	</table>
+	<button><a th:href="@{/attendanceTable}">社委員一覧</a></button>
 </body>
+
+</html>
